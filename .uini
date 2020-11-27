@@ -1,0 +1,1 @@
+open_basedir="D:\soft\UPUPW_NP7.2_1910_64\UPUPW_NP7.2_64\htdocs\firewall\;D:\soft\UPUPW_NP7.2_1910_64\UPUPW_NP7.2_64\Guard\;D:\soft\UPUPW_NP7.2_1910_64\UPUPW_NP7.2_64\phpmyadmin\;D:\soft\UPUPW_NP7.2_1910_64\UPUPW_NP7.2_64\temp\;C:\WINDOWS\Temp\"
