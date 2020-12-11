@@ -6,7 +6,7 @@ use App\Classes\CommonFun;
 use App\Concacts\SortConcact;
 
 
-class SortController extends BaseController implements SortConcact
+class AlgorithmController extends BaseController implements SortConcact
 {
     function sort()
     {
@@ -42,6 +42,7 @@ class SortController extends BaseController implements SortConcact
 //        echo "<br>";
 //        return $this->success($arr);
     }
+
 
     //插入排序
     public function insertSort()
@@ -135,6 +136,46 @@ class SortController extends BaseController implements SortConcact
         }
     }
 
+
+    function aa(){
+        set_time_limit(0);
+        ini_set("memory_limit", "2048M");
+        //0.237169
+        $arr = [];
+        for ($i = 0; $i < 1000000; $i++) {
+            $arr[] = rand(0, 999999);
+        }
+
+        $start = CommonFun::formatMicrotime();
+        $this->aaFun($arr);
+        echo CommonFun::formatMicrotime() - $start;
+    }
+
+    function aaFun($arr)
+    {
+        if (count($arr)<2){
+            return $arr;
+        }
+
+        $middle = $arr[0];
+        $left_arr = [];
+        $right_arr = [];
+
+        unset($arr[0]);
+        foreach ($arr as $value){
+            if ($value<$middle){
+                $left_arr[] = $value;
+            }else{
+                $right_arr[] = $value;
+            }
+        }
+
+        $left_arr = $this->aaFun($left_arr);
+        $right_arr = $this->aaFun($right_arr);
+
+        return array_merge($left_arr,[$middle],$right_arr);
+    }
+
     //快速排序
     function quickSort()
     {
@@ -187,14 +228,13 @@ class SortController extends BaseController implements SortConcact
         $n = $_GET['n'];
         if ($n == 0) return 0;
         if ($n == 1) return 1;
-//1 0  1 1 = 1
-//0 1  1 0
+
         $res = [[1, 0], [0, 1]];
         $base = [[1, 1], [1, 0]];
 
         $start = CommonFun::formatMicrotime();
 
-        while ($n>=1) {
+        while ($n >= 1) {
             if ($n % 2 == 1) {
                 $res = $this->feibonaqiJuzhenFun($res, $base);
             }
